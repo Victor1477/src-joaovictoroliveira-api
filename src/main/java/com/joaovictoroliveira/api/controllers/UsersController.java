@@ -32,22 +32,14 @@ public class UsersController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody UserLoginDTO userLoginDTO) {
-        try {
-            Authentication auth = this.authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(userLoginDTO.username(), userLoginDTO.password()));
-            return ResponseEntity.ok().body(new TokenResponseDTO(tokenService.generateToken((UserModel) auth.getPrincipal())));
-        } catch (Exception e) {
-            return ResponseEntity.status(401).build();
-        }
+        Authentication auth = this.authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userLoginDTO.username(), userLoginDTO.password()));
+        return ResponseEntity.ok().body(new TokenResponseDTO(tokenService.generateToken((UserModel) auth.getPrincipal())));
     }
 
     @PostMapping("/register")
     public ResponseEntity<Object> createUser(@RequestBody CreateUserDTO createUserDTO) {
-        try {
-            usersService.createUser(createUserDTO);
-            return ResponseEntity.ok().build();
-        } catch (UserAlreadyExistsException e) {
-            return ResponseEntity.badRequest().body(new ErrorHandlerDTO("User already exists"));
-        }
+        usersService.createUser(createUserDTO);
+        return ResponseEntity.ok().build();
     }
 }
