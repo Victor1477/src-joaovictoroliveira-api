@@ -33,7 +33,8 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/users/login").permitAll()
                         .requestMatchers("/users/register").hasRole("ADMIN")
-                        .requestMatchers("/tasks").hasRole("USER"))
+                        .requestMatchers("/tasks").hasRole("USER")
+                        .requestMatchers("/tasks/*").hasRole("USER"))
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
