@@ -5,6 +5,7 @@ import com.joaovictoroliveira.api.dto.CreateUserDTO;
 import com.joaovictoroliveira.api.exceptions.UserAlreadyExistsException;
 import com.joaovictoroliveira.api.models.UserModel;
 import jakarta.annotation.Resource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +31,10 @@ public class UsersService implements UserDetailsService {
         userModel.setRole(createUserDTO.role());
         userModel.setCreatedDate(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
         usersDAO.save(userModel);
+    }
+
+    public UserModel getCurrentUser() {
+        return (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
     @Override
