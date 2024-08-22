@@ -88,7 +88,7 @@ public class TaskModel {
     }
 
     public void setIsActive(Boolean isActive) {
-        isActive = isActive;
+        this.isActive = isActive;
     }
 
     public LocalDateTime getCreatedDate() {
@@ -99,19 +99,5 @@ public class TaskModel {
         this.createdDate = createdDate;
     }
 
-    public List<AttachmentModel> getAttachments() {
-        return attachments;
-    }
 
-    public void setAttachments(List<AttachmentModel> attachments) {
-        this.attachments = attachments;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
 }
