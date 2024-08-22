@@ -91,6 +91,14 @@ public class TaskModel {
         this.isActive = isActive;
     }
 
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }

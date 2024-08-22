@@ -34,6 +34,9 @@ public class TasksService {
         if (currentTaskModel == null) {
             throw new TaskNotFoundException();
         }
+        if (!taskModel.getIsActive()) {
+            taskModel.setPendencies(null);
+        }
         taskModel.setUser(usersService.getCurrentUser());
         taskModel.setCreatedDate(currentTaskModel.getCreatedDate());
         return tasksDAO.save(taskModel);
