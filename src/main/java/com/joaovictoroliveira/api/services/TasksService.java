@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -19,7 +20,8 @@ public class TasksService {
     private UsersService usersService;
 
     public List<TaskModel> getAll() {
-        return tasksDAO.findAllByUser(usersService.getCurrentUser());
+        return tasksDAO.findAllByUser(usersService.getCurrentUser())
+                .stream().sorted(Comparator.comparing(TaskModel::getCreatedDate, Comparator.reverseOrder())).toList();
     }
 
     public TaskModel save(TaskModel taskModel) {
