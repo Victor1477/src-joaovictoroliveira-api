@@ -40,12 +40,14 @@ public class SecurityFilter extends OncePerRequestFilter {
             response.setStatus(401);
             return;
         }
-
         filterChain.doFilter(request, response);
     }
 
     private String recoverToken(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader == null) {
+            authorizationHeader = request.getParameter("authorization");
+        }
         if (authorizationHeader != null) {
             return authorizationHeader.replaceAll("Bearer ", "");
         }

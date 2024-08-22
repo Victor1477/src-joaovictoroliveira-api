@@ -30,7 +30,7 @@ public class TaskModel {
     private List<AttachmentModel> attachments;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    public UserModel user;
+    private UserModel user;
 
     public TaskModel() {
     }
@@ -89,10 +89,6 @@ public class TaskModel {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
-    }
-
-    public UserModel getUser() {
-        return user;
     }
 
     public void setUser(UserModel user) {

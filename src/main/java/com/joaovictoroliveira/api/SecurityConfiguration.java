@@ -14,10 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.Iterator;
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +33,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                         .requestMatchers("/users/login").permitAll()
                         .requestMatchers("/users/register").hasRole("ADMIN")
                         .requestMatchers("/tasks").hasRole("USER")
-                        .requestMatchers("/tasks/*").hasRole("USER"))
+                        .requestMatchers(new AntPathRequestMatcher("/tasks/**")).hasRole("USER"))
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

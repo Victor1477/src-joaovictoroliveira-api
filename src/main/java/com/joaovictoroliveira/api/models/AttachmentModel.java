@@ -15,13 +15,13 @@ public class AttachmentModel {
     private String contentType;
     @Lob
     @Column
-    private Byte[] fileData;
+    private byte[] fileData;
     @ManyToOne
     @JoinColumn(name = "task_id")
     private TaskModel task;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    public UserModel user;
+    private UserModel user;
 
     public AttachmentModel() {
     }
@@ -50,11 +50,11 @@ public class AttachmentModel {
         this.contentType = contentType;
     }
 
-    public Byte[] getFileData() {
+    public byte[] getFileData() {
         return fileData;
     }
 
-    public void setFileData(Byte[] fileData) {
+    public void setFileData(byte[] fileData) {
         this.fileData = fileData;
     }
 
@@ -64,10 +64,6 @@ public class AttachmentModel {
 
     public void setTask(TaskModel task) {
         this.task = task;
-    }
-
-    public UserModel getUser() {
-        return user;
     }
 
     public void setUser(UserModel user) {
